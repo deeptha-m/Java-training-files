@@ -1,0 +1,229 @@
+﻿# A5:ER FORMAT:14
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=lesson
+Author=
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",7,"A3Landscape",$FFFFFF
+Domain=日時=DATETIME
+DomainInfo="日時","DATETIME",""
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=7
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=14
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=5
+RDBMSTypeName=MySQL
+GenerateDropTableStatement=1
+DropTableIfExists=1
+BackupRestoreTempTable=0
+CreateFk=1
+CommonField="レコード作成日時","CreateDatetime","*日時","NOT NULL",,"","",$FFFFFFFF
+CommonField="レコード更新日時","UpdateDatetime","*日時","NOT NULL",,"","",$FFFFFFFF
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+CreateOrder=Dependent
+ShowTag=1
+ShowCommonAttributes=0
+
+[Entity]
+PName=Receipt
+LName=レシート
+Comment=
+TableOption=
+Page=Main
+Left=200
+Top=250
+Field="ID","ReceiptID","BIGINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="発行日時","IssueDateTime","DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="提供方法","ProvideType","VARCHAR(30)","NOT NULL",,"","",$FFFFFFFF,""
+Field="お預かり金額","DepositAmount","INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="お釣りの金額","ChangeAmount","INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="合計金額","TotalAmount","INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="商品点数","NumberOfProduct","INT","NOT NULL",,"","",$FFFFFFFF,""
+Field="ID","ShopID","BIGINT","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20210527105739
+Position="Main",200,250
+ZOrder=5
+
+[Entity]
+PName=Shop
+LName=お店
+Comment=
+TableOption=
+Page=Main
+Left=1500
+Top=150
+Field="ID","ShopID","BIGINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="お店のロゴ","ShopLogo","VARCHAR(30)","NOT NULL",,"","",$FFFFFFFF,""
+Field="お店の住所","ShopAddress","VARCHAR(30)","NOT NULL",,"","",$FFFFFFFF,""
+Field="お店の電話番号","ShopTelNo","VARCHAR(30)","NOT NULL",,"","",$FFFFFFFF,""
+Field="お店の番号","ShopNo","INT","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20210527100034
+Position="Main",1500,150
+ZOrder=6
+
+[Entity]
+PName=FoodItem
+LName=商品
+Comment=
+TableOption=
+Page=Main
+Left=1650
+Top=700
+Field="ID","FoodItemID","BIGINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="商品の名前","FoodItemName","VARCHAR(30)","NOT NULL",,"","",$FFFFFFFF,""
+Field="商品の値段","FoodItemPrice","INT","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20210527100458
+Position="Main",1650,700
+ZOrder=7
+
+[Entity]
+PName=ReceiptDetail
+LName=レシート明細
+Comment=
+TableOption=
+Page=Main
+Left=400
+Top=1000
+Field="ID","ReceiptDetailID","BIGINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="ID","FoodItemID","BIGINT","NOT NULL",,"","",$FFFFFFFF,""
+Field="ID","ReceiptID","BIGINT","NOT NULL",,"","",$FFFFFFFF,""
+Field="ID","TaxRateID","BIGINT","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20210527105727
+Position="Main",400,1000
+ZOrder=8
+
+[Relation]
+Entity1=FoodItem
+Entity2=ReceiptDetail
+RelationType1=1
+RelationType2=3
+Fields1=FoodItemID
+Fields2=FoodItemID
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3075,6925,2981,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=308
+Bar2=692
+Bar3=298
+TermPos1=R
+TermPos2=R
+ZOrder=9
+
+[Relation]
+Entity1=Receipt
+Entity2=ReceiptDetail
+RelationType1=1
+RelationType2=3
+Fields1=ReceiptID
+Fields2=ReceiptID
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2062,7938,2024,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=206
+Bar2=794
+Bar3=202
+TermPos1=R
+TermPos2=R
+ZOrder=10
+
+[Entity]
+PName=TaxRate
+LName=税率
+Comment=
+TableOption=
+Page=Main
+Left=1700
+Top=1150
+Field="ID","TaxRateID","BIGINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="税率","Rate","DOUBLE(4,3)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20210527105043
+Position="Main",1700,1150
+ZOrder=11
+
+[Relation]
+Entity1=TaxRate
+Entity2=ReceiptDetail
+RelationType1=1
+RelationType2=3
+Fields1=TaxRateID
+Fields2=TaxRateID
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3287,6713,4328,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=329
+Bar2=671
+Bar3=433
+TermPos1=R
+TermPos2=R
+ZOrder=12
+
+[Relation]
+Entity1=Shop
+Entity2=Receipt
+RelationType1=1
+RelationType2=3
+Fields1=ShopID
+Fields2=ShopID
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,1564,8436,1246,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=156
+Bar2=844
+Bar3=125
+TermPos1=R
+TermPos2=R
+ZOrder=13
